@@ -49,12 +49,8 @@ Database hostname: $dbhostname
 Database root password: $mysqlrootpwd" > $rootdatafolder/credentials.txt
 
 echo "- Waiting 1 minute for containers to start before rebooting"
-
-secs=$((1 * 60))
-while [ $secs -gt 0 ]; do
-   echo -ne "Seconds before reboot: $secs\033[0K\r"
-   sleep 1
-   : $((secs--))
-done
+sleep 60
 
 rm -f $0
+
+reboot now
