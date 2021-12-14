@@ -22,6 +22,7 @@ mysqlnextcloudpwd=test
 echo "- Sleeping 15"
 sleep 15
 
+echo "- Getting login screen script"
 wget -O /usr/local/bin/issue.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/issue.sh
 chmod 755 /usr/local/bin/issue.sh
 echo "#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0" > /etc/rc.local
