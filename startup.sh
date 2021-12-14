@@ -10,8 +10,10 @@ https=443
 dbusername=nextcloud
 dbname=nextcloud
 dbhostname=db
-mysqlrootpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </dev/urandom | head -c 20)
-mysqlnextcloudpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </dev/urandom | head -c 20)
+#mysqlrootpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </dev/urandom | head -c 20)
+#mysqlnextcloudpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </dev/urandom | head -c 20)
+mysqlrootpwd=test
+mysqlnextcloudpwd=test
 
 ## Starting Nextcloud Installation
 # Creating environnment and variables
@@ -20,6 +22,10 @@ mysqlnextcloudpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </de
 echo "- Sleeping 15"
 sleep 15
 
+wget -O /usr/local/bin/issue.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/issue.sh
+chmod 755 /usr/local/bin/issue.sh
+echo "#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0" > /etc/rc.local
+chmod 755 /etc/rc.local
 
 useradd $username
 gid=$(id -g $username)
@@ -41,10 +47,5 @@ Database password: $mysqlnextcloudpwd
 Database name: $dbname
 Database hostname: $dbhostname
 Database root password: $mysqlrootpwd" > $rootdatafolder/credentials.txt
-
-wget -O /usr/local/bin/issue.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/issue.sh
-chmod 755 /usr/local/bin/issue.sh
-echo "#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0" > /etc/rc.local
-chmod 755 /etc/rc.local
 
 rm -f $0
