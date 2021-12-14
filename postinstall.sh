@@ -11,11 +11,16 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] 
 
 # Installing docker
 apt update -y
-apt install -y docker-ce docker-ce-cli containerd.io sudo
+apt install -y docker-ce docker-ce-cli containerd.io samba
 
 # Download reboot script and add run from rc.local
 wget -O /root/startup.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/startup.sh
 chmod +x /root/startup.sh
 # Add script to be started on boot then remove it once ran
 echo "#!/bin/sh -e \n/root/startup.sh \nrm -f /etc/rc.local \nexit 0" > /etc/rc.local
+chmod 755 /etc/rc.local
+
+wget -O /usr/local/bin/issue.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/issue.sh
+chmod 755 /usr/local/bin/issue.sh
+echo "#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0" > /etc/rc.local
 chmod 755 /etc/rc.local
