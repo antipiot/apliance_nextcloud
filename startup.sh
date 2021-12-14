@@ -16,6 +16,11 @@ mysqlnextcloudpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </de
 ## Starting Nextcloud Installation
 # Creating environnment and variables
 
+# Sleep to leave time for network
+echo "- Sleeping 15"
+sleep 15
+
+
 useradd $username
 gid=$(id -g $username)
 uid=$(id -u $username)
