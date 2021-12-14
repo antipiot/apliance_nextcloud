@@ -10,10 +10,8 @@ https=443
 dbusername=nextcloud
 dbname=nextcloud
 dbhostname=db
-#mysqlrootpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </dev/urandom | head -c 20)
-#mysqlnextcloudpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&\()*+,-./:;<=>?@[\]^_{}~' </dev/urandom | head -c 20)
-mysqlrootpwd=test
-mysqlnextcloudpwd=test
+mysqlrootpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&()*+,.:<=>?@_' </dev/urandom | head -c 20)
+mysqlnextcloudpwd=$(LC_ALL=C tr -dc 'A-Za-z0-9!#%&()*+,.:<=>?@_' </dev/urandom | head -c 20)
 
 ## Starting Nextcloud Installation
 # Creating environnment and variables
@@ -25,9 +23,10 @@ sleep 15
 echo "- Getting login screen script"
 wget -O /usr/local/bin/issue.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/issue.sh
 chmod 755 /usr/local/bin/issue.sh
-echo "#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0" > /etc/rc.local
+echo '#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0' > /etc/rc.local
 chmod 755 /etc/rc.local
 
+echo "- Adding User"
 useradd $username
 gid=$(id -g $username)
 uid=$(id -u $username)
