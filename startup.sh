@@ -3,6 +3,7 @@
 # Jonas Sauge
 # Settings
 
+rootdatafolder=/opt/nextcloud
 username=nextcloud
 http=80
 https=443
@@ -19,7 +20,7 @@ useradd $username
 gid=$(id -g $username)
 uid=$(id -u $username)
 
-rootdatafolder=/mnt/nextcloud
+
 mkdir $rootdatafolder
 mkdir $rootdatafolder/database
 chown -R $uid:$gid $rootdatafolder
