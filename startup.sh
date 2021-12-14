@@ -25,8 +25,6 @@ mkdir $rootdatafolder
 mkdir $rootdatafolder/database
 chown -R $uid:$gid $rootdatafolder
 
-
-
 # Starting mysql container
 docker run -d --name $dbhostname --restart unless-stopped --user $uid:$gid -v $rootdatafolder/database:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=$mysqlrootpwd -e MYSQL_DATABASE=$dbname -e MYSQL_USER=$dbusername -e MYSQL_PASSWORD=$mysqlnextcloudpwd mariadb:10.5 --transaction-isolation=READ-COMMITTED --binlog-format=ROW
 # Starting nextcloud container
@@ -38,5 +36,10 @@ Database password: $mysqlnextcloudpwd
 Database name: $dbname
 Database hostname: $dbhostname
 Database root password: $mysqlrootpwd" > $rootdatafolder/credentials.txt
+
+wget -O /usr/local/bin/issue.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/issue.sh
+chmod 755 /usr/local/bin/issue.sh
+echo "#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0" > /etc/rc.local
+chmod 755 /etc/rc.local
 
 rm -f $0

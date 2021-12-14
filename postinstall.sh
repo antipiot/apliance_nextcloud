@@ -20,7 +20,4 @@ chmod +x /root/startup.sh
 echo "#!/bin/sh -e \n/root/startup.sh \nrm -f /etc/rc.local \nexit 0" > /etc/rc.local
 chmod 755 /etc/rc.local
 
-wget -O /usr/local/bin/issue.sh https://raw.githubusercontent.com/antipiot/apliance_nextcloud/master/issue.sh
-chmod 755 /usr/local/bin/issue.sh
-echo "#!/bin/sh -e \n/usr/local/bin/issue.sh \nexit 0" > /etc/rc.local
-chmod 755 /etc/rc.local
+
