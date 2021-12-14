@@ -48,8 +48,8 @@ Database name: $dbname
 Database hostname: $dbhostname
 Database root password: $mysqlrootpwd" > $rootdatafolder/credentials.txt
 
-echo "- Waiting 1 minute for containers to start before rebooting"
-sleep 60
+echo "- Waiting 3 minute for containers to start before rebooting"
+sleep 180
 
 rm -f $0
 
